@@ -1,42 +1,111 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+:root {
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+* {
+  box-sizing: border-box;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+body {
+  margin: 0;
+  background: #f3f5f9;
+  color: #111827;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+.page {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 24px;
 }
 
 .card {
-  padding: 2em;
+  display: inline-block;      /* se ajusta al contenido */
+  max-width: 95vw;            /* evita que se salga de la pantalla */
+  background: white;
+  border-radius: 14px;
+  padding: 18px 18px 22px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.18);
 }
 
-.read-the-docs {
-  color: #888;
+.title {
+  margin: 0 0 14px;
+  font-size: 20px;
+  font-weight: 800;
+  color: #0f2c55;
+}
+
+.frame {
+  display: inline-block;
+  max-width: 100%;
+
+  border: 2px solid #2563eb;
+  border-radius: 12px;
+  padding: 18px;
+}
+.ficha {
+  padding: 6px 4px 0;
+}
+
+.name {
+  margin: 6px 0 14px;
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.course {
+  margin: 0 0 16px;
+  font-size: 14px;
+}
+
+.subtitle {
+  margin: 0 0 8px;
+  font-weight: 700;
+  font-size: 14px;
+  color: #1f2937;
+}
+
+.subjects {
+  margin: 0 0 16px 18px;
+  padding: 0;
+  font-size: 14px;
+}
+
+.boletin {
+  margin-top: 14px;
+  border: 1px solid rgba(37, 99, 235, 0.45);
+  border-radius: 12px;
+  padding: 14px;
+  background: #ffffff;
+}
+
+.boletinTitle {
+  margin: 0 0 10px;
+  font-weight: 800;
+  font-size: 13px;
+}
+
+.row {
+  margin: 8px 0;
+  font-size: 13px;
+}
+
+.final {
+  margin: 12px 0;
+  font-size: 13px;
+  color: #2563eb;
+}
+
+.warning {
+  margin: 10px 0 0;
+  font-size: 13px;
+  color: #dc2626;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 700;
+}
+
+.warningIcon {
+  font-size: 14px;
 }

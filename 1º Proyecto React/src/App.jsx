@@ -1,35 +1,32 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import "./App.css";
+import FichaAlumno from "./components/FIchaAlumno.js";
 
-function App() {
-  const [count, setCount] = useState(0)
+export default function App() {
+  // Datos del alumno (los define App como dice el enunciado)
+  const nombreEstudiante = "Lucas García";
+  const curso = "2º Desarrollo de Aplicaciones Web";
+  const asignaturas = ["React JS", "Bases de Datos", "Desarrollo Interfaces"];
+
+  const registroAcademico = {
+    notas: { parcial: 8.5, proyecto: 9.2 },
+    presencialidad: 75,
+  };
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
+    <div className="page">
       <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+        <h1 className="title">Panel de Administración Escolar</h1>
 
-export default App
+        <div className="frame">
+          <FichaAlumno
+            nombre={nombreEstudiante}
+            curso={curso}
+            asignaturas={asignaturas}
+            notas={registroAcademico.notas}
+            asistencia={registroAcademico.presencialidad}
+          />
+        </div>
+      </div>
+    </div>
+  );
+}
