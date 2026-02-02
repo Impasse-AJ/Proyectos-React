@@ -1,5 +1,5 @@
 import "./App.css";
-import FichaAlumno from "./components/FIchaAlumno.js";
+import FichaAlumno from "./components/FichaAlumno.jsx";
 
 export default function App() {
   // Datos del alumno (los define App como dice el enunciado)

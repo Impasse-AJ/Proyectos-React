@@ -109,3 +109,18 @@ body {
 .warningIcon {
   font-size: 14px;
 }
+.btn {
+  margin-top: 8px;
+  padding: 10px 16px;
+  border: 2px solid #000000;
+  background: #fff;
+  border-radius: 10px;
+  font-weight: 700;
+  cursor: pointer;
+  color: #111827;
+
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+}

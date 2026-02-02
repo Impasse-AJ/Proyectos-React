@@ -1,6 +1,11 @@
-import BoletinNotas from "./BoletinNotas";
+import { useState } from "react";
+import BoletinNotas from "./BoletinNotas.jsx";
 
 export default function FichaAlumno({ nombre, curso, asignaturas, notas, asistencia }) {
+  const [mostrarNotas, setMostrarNotas] = useState(false);
+
+  const toggleNotas = () => setMostrarNotas((prev) => !prev);
+
   return (
     <section className="ficha">
       <p className="name">{nombre}</p>
@@ -16,8 +21,11 @@ export default function FichaAlumno({ nombre, curso, asignaturas, notas, asisten
         ))}
       </ul>
 
-      {/* Componente nieto */}
-      <BoletinNotas notas={notas} asistencia={asistencia} />
+      <button className="btn" onClick={toggleNotas}>
+        {mostrarNotas ? "Ocultar Notas" : "Mostrar Notas"}
+      </button>
+
+      {mostrarNotas && <BoletinNotas notas={notas} asistencia={asistencia} />}
     </section>
   );
 }
