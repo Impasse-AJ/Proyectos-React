@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import "./App.css";
 import ListadoCarritos from "./ListadoCarritos";
 
+const API_URL = "https://fakestoreapi.com/carts";
+
 export default function App() {
   const [carritos, setCarritos] = useState([]);
   const [cargando, setCargando] = useState(true);
@@ -13,13 +15,14 @@ export default function App() {
         setCargando(true);
         setError("");
 
-        const resp = await fetch("https://fakestoreapi.com/carts");
+        const resp = await fetch(API_URL);
+
         if (!resp.ok) throw new Error("Error al cargar los carritos");
 
         const data = await resp.json(); // requisito: convertir a JSON
-        setCarritos(data);
+        setCarritos(Array.isArray(data) ? data : []);
       } catch (e) {
-        setError(e.message || "Ha ocurrido un error");
+        setError(e?.message || String(e));
       } finally {
         setCargando(false);
       }
@@ -33,10 +36,15 @@ export default function App() {
       <div className="panel">
         <h2 className="title">Resumen de Carritos de Compra</h2>
 
-        {cargando && <p className="info">Cargando carritos...</p>}
-        {error && <p className="error">{error}</p>}
+     {error ? (
+      <p className="status status-error">{error}</p>
+    ) : cargando ? (
+      <p className="status status-info">Cargando carritos...</p>
+    ) : (
+      <ListadoCarritos carritos={carritos} />
+    )}
 
-        {!cargando && !error && <ListadoCarritos carritos={carritos} />}
+        
       </div>
     </div>
   );

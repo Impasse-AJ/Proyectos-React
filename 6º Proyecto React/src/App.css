@@ -61,3 +61,15 @@ body {
   padding: 0;
   font-size: 13px;
 }
+.status {
+  margin: 0;
+  font-weight: 700;
+}
+
+.status-info {
+  color: #374151;
+}
+
+.status-error {
+  color: #b91c1c;
+}
