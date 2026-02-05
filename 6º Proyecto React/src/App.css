@@ -1,0 +1,63 @@
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #f3f5f9;
+}
+
+.page {
+  padding: 24px;
+}
+
+.panel {
+  width: 360px;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.12);
+  padding: 14px;
+}
+
+.title {
+  margin: 0 0 12px;
+  font-size: 16px;
+  font-weight: 800;
+}
+
+.info {
+  margin: 0;
+  color: #444;
+}
+
+.error {
+  margin: 0;
+  color: #b91c1c;
+  font-weight: 700;
+}
+
+.carritoCard {
+  border-top: 1px solid #e5e7eb;
+  padding: 12px 0;
+}
+
+.carritoCard:first-child {
+  border-top: none;
+  padding-top: 0;
+}
+
+.carritoId {
+  margin: 0 0 6px;
+  font-weight: 800;
+}
+
+.carritoFecha,
+.productosTitulo,
+.total {
+  margin: 6px 0;
+  font-size: 13px;
+}
+
+.productosLista {
+  margin: 6px 0 8px 18px;
+  padding: 0;
+  font-size: 13px;
+}
