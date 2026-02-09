@@ -8,7 +8,7 @@ export default function ListadoCarritos({ carritos }) {
   };
 
   const totalProductos = (products) => {
-    // suma de quantity de todos los productos del carrito
+    // suma de quantity de todos los productos del carrito0
     return products.reduce((acc, p) => acc + p.quantity, 0);
   };
 
