@@ -1,0 +1,268 @@
+/* =========================
+   Estilos generales (junior)
+   ========================= */
+
+:root {
+  --bg: #f3f5f9;
+  --text: #111827;
+  --muted: #6b7280;
+  --border: #e5e7eb;
+
+  --primary: #2563eb;
+  --danger: #dc2626;
+  --ok: #16a34a;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
+
+/* Contenedor principal */
+.app {
+  width: min(860px, 92vw);
+  margin: 22px auto;
+  padding: 14px;
+}
+
+/* Barra superior */
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.title {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 800;
+}
+
+.meta {
+  margin: 6px 0 0;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+/* Tarjetas */
+.card {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 12px;
+  margin-bottom: 12px;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
+}
+
+.sectionTitle {
+  margin: 0 0 10px;
+  font-size: 14px;
+  color: var(--primary);
+}
+
+/* Status */
+.status {
+  margin: 10px 0;
+  padding: 10px;
+  border-radius: 8px;
+  font-weight: 700;
+  border: 1px solid var(--border);
+  background: white;
+}
+
+.status-info {
+  color: #374151;
+}
+
+.status-error {
+  color: var(--danger);
+  border-color: rgba(220, 38, 38, 0.35);
+  background: #fff5f5;
+}
+
+/* Pequeñas ayudas */
+.hint {
+  margin: 6px 0 10px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+/* Layout de inputs */
+.grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 12px;
+  align-items: end;
+}
+
+.field {
+  display: grid;
+  gap: 6px;
+}
+
+.field label {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.fieldCol {
+  display: grid;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+
+input,
+textarea {
+  padding: 8px 10px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  outline: none;
+  background: white;
+  color: var(--text);
+}
+textarea {
+  resize: vertical;        /* Solo vertical */
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  min-height: 120px;       /* 👈 evita que se “aplaste” */
+}
+
+
+input:focus,
+textarea:focus {
+  border-color: rgba(37, 99, 235, 0.6);
+}
+
+/* Contadores */
+.counter {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.counter-bad {
+  color: var(--danger);
+  font-weight: 700;
+}
+
+/* Acciones (botones del buscador) */
+.actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
+
+/* Botones */
+.btn {
+  padding: 8px 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: white;
+  cursor: pointer;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+}
+
+.btn-primary {
+  border-color: rgba(37, 99, 235, 0.4);
+  color: var(--primary);
+}
+
+.btn-danger {
+  border-color: rgba(220, 38, 38, 0.4);
+  color: var(--danger);
+}
+
+.btn-active {
+  border-color: rgba(37, 99, 235, 0.8);
+  background: rgba(37, 99, 235, 0.08);
+}
+
+/* Header del listado */
+.listHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.badge {
+  font-size: 12px;
+  color: var(--muted);
+  border: 1px solid var(--border);
+  padding: 4px 8px;
+  border-radius: 999px;
+}
+
+/* Posts */
+.posts {
+  display: grid;
+  gap: 10px;
+}
+
+.post {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px;
+  background: white;
+}
+
+.postTop {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.postMeta {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.pill {
+  font-size: 12px;
+  color: var(--muted);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 2px 8px;
+}
+
+.pill-local {
+  border-color: rgba(22, 163, 74, 0.4);
+  color: var(--ok);
+}
+
+.postTitle {
+  margin: 10px 0 6px;
+  font-size: 15px;
+}
+
+.postBody {
+  margin: 0;
+  color: #374151;
+  font-size: 14px;
+  line-height: 1.35;
+}
+
+/* Responsive simple */
+@media (max-width: 640px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .topbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
