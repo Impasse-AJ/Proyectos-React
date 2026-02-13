@@ -124,14 +124,14 @@ textarea {
   background: white;
   color: var(--text);
 }
+
 textarea {
-  resize: vertical;        /* Solo vertical */
+  resize: vertical;
   width: 100%;
   max-width: 100%;
   box-sizing: border-box;
-  min-height: 30px;       /* 👈 evita que se “aplaste” */
+  min-height: 60px;
 }
-
 
 input:focus,
 textarea:focus {
@@ -215,6 +215,9 @@ textarea:focus {
   border-radius: 10px;
   padding: 10px;
   background: white;
+
+  /* ✅ Por seguridad, evita que cualquier contenido sobresalga visualmente */
+  overflow: hidden;
 }
 
 .postTop {
@@ -246,6 +249,10 @@ textarea:focus {
 .postTitle {
   margin: 10px 0 6px;
   font-size: 15px;
+
+  /* ✅ Evita que un título con una palabra larguísima rompa el layout */
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .postBody {
@@ -253,6 +260,10 @@ textarea:focus {
   color: #374151;
   font-size: 14px;
   line-height: 1.35;
+
+  /* ✅ CLAVE: rompe palabras largas sin espacios (aaaaaa...) */
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 /* Responsive simple */

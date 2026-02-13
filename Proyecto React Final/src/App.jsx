@@ -25,6 +25,9 @@ export default function App() {
   // Posts creados por el usuario (ampliación: se guardan en localStorage)
   const [postsLocales, setPostsLocales] = useState([]);
 
+  // ✅ NUEVO: evita sobrescribir localStorage con [] al iniciar
+  const [cargadoLocal, setCargadoLocal] = useState(false);
+
   // Estado de carga y error
   const [cargando, setCargando] = useState(true);
   const [error, setError] = useState("");
@@ -56,6 +59,9 @@ export default function App() {
       setPostsLocales(Array.isArray(parseado) ? parseado : []);
     } catch {
       setPostsLocales([]);
+    } finally {
+      // ✅ NUEVO: marcamos que ya se ha terminado de leer localStorage
+      setCargadoLocal(true);
     }
   }, []);
 
@@ -78,9 +84,12 @@ export default function App() {
         setPostsApiOriginal(primeros20);
 
         // Generamos miUserId (1..10) que NO esté en los userId presentes en los posts API
+
+        // Primero obtenemos los userId usados en los primeros 20 posts
+        // Usamos un Set para asegurarnos de que no haya duplicados y para búsquedas rápidas
         const userIdsUsados = new Set(primeros20.map((p) => p.userId));
         const candidatos = [];
-
+        // Luego generamos una lista de candidatos (1..10) que no estén usados
         for (let i = 1; i <= 10; i++) {
           if (!userIdsUsados.has(i)) candidatos.push(i);
         }
@@ -93,7 +102,7 @@ export default function App() {
 
         setMiUserId(elegido);
       } catch (e) {
-        // Manejo de error simple y seguro (junior-friendly)
+        // Manejo de error simple y seguro para evitar mostrar objetos o mensajes vacíos
         setError(e?.message || String(e) || "Ha ocurrido un error.");
       } finally {
         setCargando(false);
@@ -115,8 +124,11 @@ export default function App() {
 
   // 2.4) Guardar posts locales en localStorage cada vez que cambien (ampliación)
   useEffect(() => {
+    // Solo guardamos en localStorage si ya hemos cargado los datos locales
+    if (!cargadoLocal) return;
+
     localStorage.setItem(LS_KEY, JSON.stringify(postsLocales));
-  }, [postsLocales]);
+  }, [postsLocales, cargadoLocal]);
 
   // 2.5) Título de la pestaña con número total de posts (ampliación)
   useEffect(() => {

@@ -39,7 +39,8 @@ export default function FormularioPost({ onAgregar, miUserId, titulosExistentes 
     // 4) Body entre 10 y 500 caracteres
     if (b.length < MIN_BODY) return "El contenido (body) debe tener al menos 10 caracteres.";
     if (b.length > MAX_BODY) return "El contenido (body) no puede superar 500 caracteres.";
-
+    
+    // Si todo ok, devolvemos cadena vacía
     return "";
   };
 
@@ -68,7 +69,7 @@ export default function FormularioPost({ onAgregar, miUserId, titulosExistentes 
     setTitle("");
     setBody("");
   };
-
+  // Renderizamos el formulario con los campos controlados y mostrando errores o contadores según corresponda
   return (
     <section className="card">
       <h2 className="sectionTitle">Crear Nuevo Post</h2>
@@ -94,12 +95,12 @@ export default function FormularioPost({ onAgregar, miUserId, titulosExistentes 
         </div>
 
         <div className="fieldCol">
-          <label>Contenido (10 a 500):</label>
+          <label>Contenido ({MIN_BODY} a {MAX_BODY}):</label>
           <textarea
             value={body}
             onChange={(e) => setBody(e.target.value)}
             placeholder="Escribe el contenido del post..."
-            rows={5}
+            rows={1}
           />
           <div className={`counter ${restantes < 0 ? "counter-bad" : ""}`}>
             {bodyLen}/{MAX_BODY} · Restantes: {restantes}
