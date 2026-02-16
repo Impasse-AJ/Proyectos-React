@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import "./App.css";
 
-// Componentes (los crearemos en los siguientes pasos, archivo por archivo)
+// Componentes
 import FormularioPost from "./components/    FormularioPost.jsx";
 import BuscadorPosts from "./components/    BuscadorPosts.jsx";
 import ListadoPosts from "./components/    ListadoPosts.jsx";
@@ -19,16 +19,17 @@ export default function App() {
 
   // Posts cargados desde API (solo los primeros 20)
   const [postsApi, setPostsApi] = useState([]);
+
   // Copia para "restaurar" los posts API (ampliación)
   const [postsApiOriginal, setPostsApiOriginal] = useState([]);
 
   // Posts creados por el usuario (ampliación: se guardan en localStorage)
   const [postsLocales, setPostsLocales] = useState([]);
 
-  // ✅ NUEVO: evita sobrescribir localStorage con [] al iniciar
+  // Estado para controlar si ya se han cargado los posts locales desde localStorage
   const [cargadoLocal, setCargadoLocal] = useState(false);
 
-  // Estado de carga y error
+  // Estados de carga y error para la API 
   const [cargando, setCargando] = useState(true);
   const [error, setError] = useState("");
 
@@ -54,13 +55,12 @@ export default function App() {
     const guardado = localStorage.getItem(LS_KEY);
 
     try {
+      // Por seguridad, si el contenido no es un array válido, usamos []
       const parseado = guardado ? JSON.parse(guardado) : [];
-      // Si no es array, usamos []
       setPostsLocales(Array.isArray(parseado) ? parseado : []);
     } catch {
       setPostsLocales([]);
     } finally {
-      // ✅ NUEVO: marcamos que ya se ha terminado de leer localStorage
       setCargadoLocal(true);
     }
   }, []);
@@ -71,34 +71,33 @@ export default function App() {
       try {
         setCargando(true);
         setError("");
-
+        // Carga de posts desde la API
         const resp = await fetch(API_URL);
         if (!resp.ok) throw new Error("No se pudieron cargar los posts de la API.");
-
+        // Por seguridad, validamos que la respuesta sea un array antes de usarla
         const data = await resp.json();
 
-        // Por seguridad: si la API devolviera algo raro, usamos []
+        //Si la API devolviera algo que no es un Array, usamos []
         const primeros20 = Array.isArray(data) ? data.slice(0, 20) : [];
 
         setPostsApi(primeros20);
         setPostsApiOriginal(primeros20);
-
-        // Generamos miUserId (1..10) que NO esté en los userId presentes en los posts API
+        // Generamos miUserId (1-100) que NO esté en los userId presentes en los posts API
 
         // Primero obtenemos los userId usados en los primeros 20 posts
         // Usamos un Set para asegurarnos de que no haya duplicados y para búsquedas rápidas
         const userIdsUsados = new Set(primeros20.map((p) => p.userId));
         const candidatos = [];
-        // Luego generamos una lista de candidatos (1..10) que no estén usados
-        for (let i = 1; i <= 10; i++) {
+        // Luego generamos una lista de candidatos (1-100) que no estén usados
+        for (let i = 1; i <= 100; i++) {
           if (!userIdsUsados.has(i)) candidatos.push(i);
         }
 
-        // Si por lo que sea no quedan candidatos, elegimos 10 (pero normalmente habrá)
+        // Si por lo que sea no quedan candidatos, elegimos 100 (pero normalmente habrá)
         const elegido =
           candidatos.length > 0
             ? candidatos[Math.floor(Math.random() * candidatos.length)]
-            : 10;
+            : 100;
 
         setMiUserId(elegido);
       } catch (e) {
@@ -124,7 +123,7 @@ export default function App() {
 
   // 2.4) Guardar posts locales en localStorage cada vez que cambien (ampliación)
   useEffect(() => {
-    // Solo guardamos en localStorage si ya hemos cargado los datos locales
+    // Para evitar guardar en localStorage antes de cargar los datos locales (que borraría lo guardado), esperamos a que se haya cargado
     if (!cargadoLocal) return;
 
     localStorage.setItem(LS_KEY, JSON.stringify(postsLocales));
@@ -141,6 +140,7 @@ export default function App() {
   // =========================
 
   // Unimos posts locales + API (locales arriba, porque se añaden al principio)
+  // Para optimizar, usamos useMemo para no recalcular esta combinación a menos que cambien los posts locales o de la API
   const postsCombinados = useMemo(() => {
     return [...postsLocales, ...postsApi];
   }, [postsLocales, postsApi]);
@@ -159,6 +159,7 @@ export default function App() {
 
     // 2) Ordenar (sin mutar el array original)
     filtrados = filtrados.slice().sort((a, b) => {
+      // orden por título (alfabético)
       if (orden === "title") {
         return a.title.localeCompare(b.title);
       }

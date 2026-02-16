@@ -1,5 +1,5 @@
 /* =========================
-   Estilos generales (junior)
+   Estilos generales 
    ========================= */
 
 :root {
@@ -215,8 +215,6 @@ textarea:focus {
   border-radius: 10px;
   padding: 10px;
   background: white;
-
-  /* ✅ Por seguridad, evita que cualquier contenido sobresalga visualmente */
   overflow: hidden;
 }
 

@@ -27,12 +27,6 @@ export default function BuscadorPosts({
     setOrden("userId");
   };
 
-  // Limpia ambos filtros
-  const limpiarFiltros = () => {
-    setFiltroTitulo("");
-    setFiltroUserId("");
-  };
-
   return (
     <section className="card">
       <h2 className="sectionTitle">Búsqueda y Ordenación</h2>
@@ -78,10 +72,6 @@ export default function BuscadorPosts({
           Ordenar por User ID
         </button>
 
-        {/* Limpieza */}
-        <button className="btn btn-danger" onClick={limpiarFiltros} type="button">
-          Limpiar filtros
-        </button>
       </div>
 
       <p className="hint">
